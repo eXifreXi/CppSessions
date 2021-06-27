@@ -30,6 +30,14 @@ public:
 	void DestroySession();
 	void FindSessions(int32 MaxSearchResults, bool IsLANQuery);
 	void JoinGameSession(const FOnlineSessionSearchResult& SessionResult);
+	
+	FCSOnCreateSessionComplete OnCreateSessionCompleteEvent;
+	FCSOnUpdateSessionComplete OnUpdateSessionCompleteEvent;
+	FCSOnStartSessionComplete OnStartSessionCompleteEvent;
+	FCSOnEndSessionComplete OnEndSessionCompleteEvent;
+	FCSOnDestroySessionComplete OnDestroySessionCompleteEvent;
+	FCSOnFindSessionsComplete OnFindSessionsCompleteEvent;
+	FCSOnJoinSessionComplete OnJoinGameSessionCompleteEvent;
 
 	FCSOnCreateSessionComplete OnCreateSessionCompleteEvent;
 	FCSOnUpdateSessionComplete OnUpdateSessionCompleteEvent;
