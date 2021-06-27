@@ -39,14 +39,6 @@ public:
 	FCSOnFindSessionsComplete OnFindSessionsCompleteEvent;
 	FCSOnJoinSessionComplete OnJoinGameSessionCompleteEvent;
 
-	FCSOnCreateSessionComplete OnCreateSessionCompleteEvent;
-	FCSOnUpdateSessionComplete OnUpdateSessionCompleteEvent;
-	FCSOnStartSessionComplete OnStartSessionCompleteEvent;
-	FCSOnEndSessionComplete OnEndSessionCompleteEvent;
-	FCSOnDestroySessionComplete OnDestroySessionCompleteEvent;
-	FCSOnFindSessionsComplete OnFindSessionsCompleteEvent;
-	FCSOnJoinSessionComplete OnJoinGameSessionCompleteEvent;
-
 protected:
 	void OnCreateSessionCompleted(FName SessionName, bool Successful);
 	void OnUpdateSessionCompleted(FName SessionName, bool Successful);
