@@ -15,9 +15,7 @@ UCSSessionSubsystem::UCSSessionSubsystem()
 
 void UCSSessionSubsystem::CreateSession(int32 NumPublicConnections, bool IsLANMatch)
 {
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
-
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (!sessionInterface.IsValid())
 	{
 		OnCreateSessionCompleteEvent.Broadcast(false);
@@ -51,8 +49,7 @@ void UCSSessionSubsystem::CreateSession(int32 NumPublicConnections, bool IsLANMa
 
 void UCSSessionSubsystem::OnCreateSessionCompleted(FName SessionName, bool Successful)
 {
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (sessionInterface)
 	{
 		sessionInterface->ClearOnCreateSessionCompleteDelegate_Handle(CreateSessionCompleteDelegateHandle);
@@ -63,9 +60,7 @@ void UCSSessionSubsystem::OnCreateSessionCompleted(FName SessionName, bool Succe
 
 void UCSSessionSubsystem::UpdateSession()
 {
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
-
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (!sessionInterface.IsValid())
 	{
 		OnUpdateSessionCompleteEvent.Broadcast(false);
@@ -92,8 +87,7 @@ void UCSSessionSubsystem::UpdateSession()
 
 void UCSSessionSubsystem::OnUpdateSessionCompleted(FName SessionName, bool Successful)
 {
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (sessionInterface)
 	{
 		sessionInterface->ClearOnUpdateSessionCompleteDelegate_Handle(UpdateSessionCompleteDelegateHandle);
@@ -104,9 +98,7 @@ void UCSSessionSubsystem::OnUpdateSessionCompleted(FName SessionName, bool Succe
 
 void UCSSessionSubsystem::StartSession()
 {
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
-
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (!sessionInterface.IsValid())
 	{
 		OnStartSessionCompleteEvent.Broadcast(false);
@@ -126,8 +118,7 @@ void UCSSessionSubsystem::StartSession()
 
 void UCSSessionSubsystem::OnStartSessionCompleted(FName SessionName, bool Successful)
 {
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (sessionInterface)
 	{
 		sessionInterface->ClearOnStartSessionCompleteDelegate_Handle(StartSessionCompleteDelegateHandle);
@@ -138,9 +129,7 @@ void UCSSessionSubsystem::OnStartSessionCompleted(FName SessionName, bool Succes
 
 void UCSSessionSubsystem::EndSession()
 {
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
-
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (!sessionInterface.IsValid())
 	{
 		OnEndSessionCompleteEvent.Broadcast(false);
@@ -160,8 +149,7 @@ void UCSSessionSubsystem::EndSession()
 
 void UCSSessionSubsystem::OnEndSessionCompleted(FName SessionName, bool Successful)
 {
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (sessionInterface)
 	{
 		sessionInterface->ClearOnEndSessionCompleteDelegate_Handle(EndSessionCompleteDelegateHandle);
@@ -172,9 +160,7 @@ void UCSSessionSubsystem::OnEndSessionCompleted(FName SessionName, bool Successf
 
 void UCSSessionSubsystem::DestroySession()
 {
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
-
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (!sessionInterface.IsValid())
 	{
 		OnDestroySessionCompleteEvent.Broadcast(false);
@@ -194,8 +180,7 @@ void UCSSessionSubsystem::DestroySession()
 
 void UCSSessionSubsystem::OnDestroySessionCompleted(FName SessionName, bool Successful)
 {
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (sessionInterface)
 	{
 		sessionInterface->ClearOnDestroySessionCompleteDelegate_Handle(DestroySessionCompleteDelegateHandle);
@@ -206,10 +191,7 @@ void UCSSessionSubsystem::OnDestroySessionCompleted(FName SessionName, bool Succ
 
 void UCSSessionSubsystem::FindSessions(int32 MaxSearchResults, bool IsLANQuery)
 {
-	const ULocalPlayer* localPlayer = GetWorld()->GetFirstLocalPlayerFromController();
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
-
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (!sessionInterface.IsValid())
 	{
 		OnFindSessionsCompleteEvent.Broadcast(TArray<FOnlineSessionSearchResult>(), false);
@@ -225,6 +207,7 @@ void UCSSessionSubsystem::FindSessions(int32 MaxSearchResults, bool IsLANQuery)
 
 	LastSessionSearch->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);
 
+	const ULocalPlayer* localPlayer = GetWorld()->GetFirstLocalPlayerFromController();
 	if (!sessionInterface->FindSessions(*localPlayer->GetPreferredUniqueNetId(), LastSessionSearch.ToSharedRef()))
 	{
 		sessionInterface->ClearOnFindSessionsCompleteDelegate_Handle(FindSessionsCompleteDelegateHandle);
@@ -235,8 +218,7 @@ void UCSSessionSubsystem::FindSessions(int32 MaxSearchResults, bool IsLANQuery)
 
 void UCSSessionSubsystem::OnFindSessionsCompleted(bool Successful)
 {
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (sessionInterface)
 	{
 		sessionInterface->ClearOnFindSessionsCompleteDelegate_Handle(FindSessionsCompleteDelegateHandle);
@@ -253,10 +235,7 @@ void UCSSessionSubsystem::OnFindSessionsCompleted(bool Successful)
 
 void UCSSessionSubsystem::JoinGameSession(const FOnlineSessionSearchResult& SessionResult)
 {
-		const ULocalPlayer* localPlayer = GetWorld()->GetFirstLocalPlayerFromController();
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
-
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (!sessionInterface.IsValid())
 	{
 		OnJoinGameSessionCompleteEvent.Broadcast(EOnJoinSessionCompleteResult::UnknownError);
@@ -266,6 +245,7 @@ void UCSSessionSubsystem::JoinGameSession(const FOnlineSessionSearchResult& Sess
 	JoinSessionCompleteDelegateHandle =
 		sessionInterface->AddOnJoinSessionCompleteDelegate_Handle(JoinSessionCompleteDelegate);
 
+	const ULocalPlayer* localPlayer = GetWorld()->GetFirstLocalPlayerFromController();
 	if (!sessionInterface->JoinSession(*localPlayer->GetPreferredUniqueNetId(), NAME_GameSession, SessionResult))
 	{
 		sessionInterface->ClearOnJoinSessionCompleteDelegate_Handle(JoinSessionCompleteDelegateHandle);
@@ -276,8 +256,7 @@ void UCSSessionSubsystem::JoinGameSession(const FOnlineSessionSearchResult& Sess
 
 void UCSSessionSubsystem::OnJoinSessionCompleted(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
 {
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (sessionInterface)
 	{
 		sessionInterface->ClearOnJoinSessionCompleteDelegate_Handle(JoinSessionCompleteDelegateHandle);
@@ -288,9 +267,7 @@ void UCSSessionSubsystem::OnJoinSessionCompleted(FName SessionName, EOnJoinSessi
 
 bool UCSSessionSubsystem::TryTravelToCurrentSession()
 {
-	IOnlineSubsystem* const subsystem = Online::GetSubsystem(GetWorld());
-	const IOnlineSessionPtr sessionInterface = subsystem->GetSessionInterface();
-
+	const IOnlineSessionPtr sessionInterface = Online::GetSessionInterface(GetWorld());
 	if (!sessionInterface.IsValid())
 	{
 		return false;

@@ -31,6 +31,14 @@ public:
 	void FindSessions(int32 MaxSearchResults, bool IsLANQuery);
 	void JoinGameSession(const FOnlineSessionSearchResult& SessionResult);
 
+	FCSOnCreateSessionComplete OnCreateSessionCompleteEvent;
+	FCSOnUpdateSessionComplete OnUpdateSessionCompleteEvent;
+	FCSOnStartSessionComplete OnStartSessionCompleteEvent;
+	FCSOnEndSessionComplete OnEndSessionCompleteEvent;
+	FCSOnDestroySessionComplete OnDestroySessionCompleteEvent;
+	FCSOnFindSessionsComplete OnFindSessionsCompleteEvent;
+	FCSOnJoinSessionComplete OnJoinGameSessionCompleteEvent;
+
 protected:
 	void OnCreateSessionCompleted(FName SessionName, bool Successful);
 	void OnUpdateSessionCompleted(FName SessionName, bool Successful);
@@ -42,33 +50,26 @@ protected:
 	bool TryTravelToCurrentSession();
 
 private:
-	FCSOnCreateSessionComplete OnCreateSessionCompleteEvent;
 	FOnCreateSessionCompleteDelegate CreateSessionCompleteDelegate;
 	FDelegateHandle CreateSessionCompleteDelegateHandle;
 	TSharedPtr<FOnlineSessionSettings> LastSessionSettings;
 
-	FCSOnUpdateSessionComplete OnUpdateSessionCompleteEvent;
 	FOnUpdateSessionCompleteDelegate UpdateSessionCompleteDelegate;
   	FDelegateHandle UpdateSessionCompleteDelegateHandle;
 
-	FCSOnStartSessionComplete OnStartSessionCompleteEvent;
 	FOnStartSessionCompleteDelegate StartSessionCompleteDelegate;
 	FDelegateHandle StartSessionCompleteDelegateHandle;
 
-	FCSOnEndSessionComplete OnEndSessionCompleteEvent;
 	FOnEndSessionCompleteDelegate EndSessionCompleteDelegate;
 	FDelegateHandle EndSessionCompleteDelegateHandle;
 
-	FCSOnDestroySessionComplete OnDestroySessionCompleteEvent;
 	FOnDestroySessionCompleteDelegate DestroySessionCompleteDelegate;
 	FDelegateHandle DestroySessionCompleteDelegateHandle;
 
-	FCSOnFindSessionsComplete OnFindSessionsCompleteEvent;
 	FOnFindSessionsCompleteDelegate FindSessionsCompleteDelegate;
 	FDelegateHandle FindSessionsCompleteDelegateHandle;
 	TSharedPtr<FOnlineSessionSearch> LastSessionSearch;
 
-	FCSOnJoinSessionComplete OnJoinGameSessionCompleteEvent;
 	FOnJoinSessionCompleteDelegate JoinSessionCompleteDelegate;
 	FDelegateHandle JoinSessionCompleteDelegateHandle;
 };
