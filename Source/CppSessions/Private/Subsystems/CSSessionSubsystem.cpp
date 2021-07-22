@@ -73,7 +73,7 @@ void UCSSessionSubsystem::UpdateSession()
 	UpdateSessionCompleteDelegateHandle =
 		sessionInterface->AddOnUpdateSessionCompleteDelegate_Handle(UpdateSessionCompleteDelegate);
 
-	if (!sessionInterface->UpdateSession(NAME_GameSession, *LastSessionSettings))
+	if (!sessionInterface->UpdateSession(NAME_GameSession, *updatedSessionSettings))
 	{
 		sessionInterface->ClearOnUpdateSessionCompleteDelegate_Handle(UpdateSessionCompleteDelegateHandle);
 
