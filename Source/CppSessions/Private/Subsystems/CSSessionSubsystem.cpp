@@ -55,7 +55,7 @@ void UCSSessionSubsystem::OnCreateSessionCompleted(FName SessionName, bool Succe
 		sessionInterface->ClearOnCreateSessionCompleteDelegate_Handle(CreateSessionCompleteDelegateHandle);
 	}
 
-	OnUpdateSessionCompleteEvent.Broadcast(Successful);
+	OnCreateSessionCompleteEvent.Broadcast(Successful);
 }
 
 void UCSSessionSubsystem::UpdateSession()
@@ -93,7 +93,7 @@ void UCSSessionSubsystem::OnUpdateSessionCompleted(FName SessionName, bool Succe
 		sessionInterface->ClearOnUpdateSessionCompleteDelegate_Handle(UpdateSessionCompleteDelegateHandle);
 	}
 
-	OnCreateSessionCompleteEvent.Broadcast(Successful);
+	OnUpdateSessionCompleteEvent.Broadcast(Successful);
 }
 
 void UCSSessionSubsystem::StartSession()
